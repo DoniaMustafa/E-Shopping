@@ -1,6 +1,6 @@
 # E-Shopping
 
-## E-shopping application, you can buy and sell any product you want, you can also browse all product
+## E-shopping application you can buy and sell any product foe it , you can also browse all product.
 
 #screens
 
