@@ -16,7 +16,8 @@ class HomeCubit extends Cubit<HomeState> {
     emit(LoadState());
     return await repository.getAllProd(token: myToken!).then((value) {
       allProductModel = allProductModelFromJson(value.toString());
-      emit(SuccessState());
+
+      emit(SuccessState(allProductModel));
     }).catchError((error) {
       emit(ErrorState(error.toString()));
     });

@@ -25,7 +25,7 @@ class IconsMenuAndCartWidget extends StatelessWidget {
             const SizedBox(
               height: 25.0,
             ),
-            _buildUserNameWidget(),
+            _buildUserNameWidget(context),
           ],
         ),
         _buildCartWidget(),
@@ -41,7 +41,7 @@ class IconsMenuAndCartWidget extends StatelessWidget {
   },
 );
 
-  Widget _buildUserNameWidget() => Container(
+  Widget _buildUserNameWidget(context) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         constraints: const BoxConstraints(maxHeight: 60.0),
         child: Row(
@@ -49,9 +49,12 @@ class IconsMenuAndCartWidget extends StatelessWidget {
             CustomTextWidget(
                 style: textThemeData.headline6!.copyWith(color: white),
                 txt: 'Welcome '),
-            CustomTextWidget(
-                style: textThemeData.headline6!.copyWith(color: gray),
-                txt: 'Donia Mostafa')
+            GestureDetector(
+              onTap: ()=>Navigator.pushNamed(context,'/myProfile'),
+              child: CustomTextWidget(
+                  style: textThemeData.headline6!.copyWith(color: gray),
+                  txt: 'Donia Mostafa'),
+            )
           ],
         ),
       );

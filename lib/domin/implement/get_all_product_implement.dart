@@ -10,7 +10,7 @@ class GetAllProductImplement implements GetAllProductRepository {
   Future<Response?> getAllProd({required String token}) async {
     return await dioHelper
         .getData(
-            url:'get-all-products',
+            url:allProductsEndPoint,
             token:token);
   }
 }

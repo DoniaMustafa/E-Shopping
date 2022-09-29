@@ -11,9 +11,13 @@ bool isIList;
     return  CircleAvatar(
       radius: isIList ?15.0:20.0,
       backgroundColor: isIList?Colors.transparent:white,
-      child: Icon(
-        icon,
-        color:isIList ?Colors.red[900]: gray,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 2.0),
+        child: Icon(
+          icon,
+          color:isIList ?Colors.red[900]: gray,
+          size: 25,
+        ),
       ),
     );
   }

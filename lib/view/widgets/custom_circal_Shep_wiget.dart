@@ -26,8 +26,11 @@ class CustomCircleShapeWidget extends StatelessWidget {
         child: Row(
           children: [
             isIcon == true
-                ? CustomCircleIconWidget(
-                    icon: icon!,
+                ? GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: CustomCircleIconWidget(
+                      icon: icon!,
+                    ),
                   )
                 : ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(30.0)),
@@ -41,11 +44,7 @@ class CustomCircleShapeWidget extends StatelessWidget {
             const SizedBox(
               width: 10.0,
             ),
-            CustomTextWidget(
-                txt: txt,
-                style: isIcon == true
-                    ? textThemeData.subtitle2!
-                    : textThemeData.subtitle2!),
+            CustomTextWidget(txt: txt, style: textThemeData.subtitle1!),
           ],
         ));
   }

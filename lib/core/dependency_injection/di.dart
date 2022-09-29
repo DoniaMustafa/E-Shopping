@@ -1,14 +1,20 @@
 import 'package:fashion_app/data/datasourse/local/cache_helper.dart';
 import 'package:fashion_app/data/datasourse/remote/dio_server.dart';
 import 'package:fashion_app/data/repositories/get_all_product_repository.dart';
+import 'package:fashion_app/data/repositories/my_profile_repository.dart';
 import 'package:fashion_app/data/repositories/signIn_repository.dart';
 import 'package:fashion_app/data/repositories/signUp_repository.dart';
+import 'package:fashion_app/data/repositories/single_product_repository.dart';
 import 'package:fashion_app/domin/implement/get_all_product_implement.dart';
+import 'package:fashion_app/domin/implement/my_profile_implement.dart';
 import 'package:fashion_app/domin/implement/signIn_implement.dart';
 import 'package:fashion_app/domin/implement/signUp_implement.dart';
+import 'package:fashion_app/domin/implement/single_product_impelment.dart';
 import 'package:fashion_app/view/pages/home/home_bloc/home_cubit.dart';
+import 'package:fashion_app/view/pages/my_profile/my_profile_bloc/my_profile_cubit.dart';
 import 'package:fashion_app/view/pages/sign_in/sign_in_bloc/sign_in_cubit.dart';
 import 'package:fashion_app/view/pages/sign_up/sign_up_bloc/sign_up_cubit.dart';
+import 'package:fashion_app/view/pages/single_product/single_product_bloc/single_product_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,5 +45,17 @@ Future init() async {
   di.registerLazySingleton<GetAllProductRepository>(
       () => GetAllProductImplement(di<DioHelper>()));
 
-  di.registerLazySingleton<HomeCubit>(() => HomeCubit(di<GetAllProductRepository>()));
+  di.registerLazySingleton<HomeCubit>(
+      () => HomeCubit(di<GetAllProductRepository>()));
+
+  //singleProduct
+  di.registerLazySingleton<SingleProductRepository>(
+      () => SingleProductImplement(di<DioHelper>()));
+  di.registerLazySingleton<SingleProductCubit>(
+      () => SingleProductCubit(di<SingleProductRepository>()));
+
+  //myProfile
+  di.registerLazySingleton<MyProfileRepository>(
+      () => MyProfileImplement(di<DioHelper>()));
+  di.registerSingleton<MyProfileCubit>(MyProfileCubit(di<MyProfileRepository>()));
 }

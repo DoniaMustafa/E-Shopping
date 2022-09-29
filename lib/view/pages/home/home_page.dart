@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
           child: Stack(
             children: [
               DetailsOfDeepWidget(),
-              const ListOfProductWidget()
+              const ListOfProductHomeWidget()
             ],
           ),
         ),

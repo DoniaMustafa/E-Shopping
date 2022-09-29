@@ -4,7 +4,7 @@ import 'package:fashion_app/core/dependency_injection/di.dart';
 import 'package:fashion_app/core/utils/constant.dart';
 import 'package:fashion_app/core/utils/end_pints.dart';
 import 'package:fashion_app/data/datasourse/local/cache_helper.dart';
-import 'package:fashion_app/data/models/uesr_info_model.dart';
+import 'package:fashion_app/data/models/uesr_model.dart';
 import 'package:fashion_app/data/repositories/signIn_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ class SignInCubit extends Cubit<SignInState> {
     emit(ShowState());
   }
 
-  UserInfo? userData;
+  UserModel? userData;
 
   login(context) async {
     emit(LoadState());
@@ -33,6 +33,7 @@ class SignInCubit extends Cubit<SignInState> {
         .signIn(email: emailController.text, pass: passController.text)
         .then((value) {
       userData = userInfoFromJson(value.toString());
+      print(value!.data);
       emit(SuccessState(userData));
     }).catchError((error) {
       emit(ErrorState(error.toString()));

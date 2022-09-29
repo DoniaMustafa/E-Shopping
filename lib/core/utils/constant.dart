@@ -22,3 +22,9 @@ Future<dynamic> getUserToken() async {
 
   return await di<CacheHelper>().get('userToken');
 }
+class Data {
+  Object? tag;
+  String? id;
+
+  Data({this.id, this.tag});
+}
