@@ -50,7 +50,7 @@ class _SingleProductPageState extends State<SingleProductPage> {
                     left: 15.0,
                     child: GestureDetector(
                       onTap: () => Navigator.pop(context),
-                      child: const CustomCircleShapeWidget(
+                      child:  CustomCircleShapeWidget(
                           txt: 'Back',
                           isIcon: true,
                           icon: Icons.arrow_back_ios),

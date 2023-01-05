@@ -1,6 +1,18 @@
 import 'package:fashion_app/core/dependency_injection/di.dart';
 import 'package:fashion_app/data/datasourse/local/cache_helper.dart';
 import 'package:fashion_app/data/models/department_icon_model.dart';
+import 'package:flutter/cupertino.dart';
+
+
+TextEditingController? prodPrices=TextEditingController();
+TextEditingController? prodSize=TextEditingController();
+TextEditingController? prodColor=TextEditingController();
+TextEditingController? variantColorName=TextEditingController();
+TextEditingController? variantColorSize=TextEditingController();
+TextEditingController? prodName=TextEditingController();
+TextEditingController? description=TextEditingController();
+
+
 
 
 
@@ -27,4 +39,26 @@ class Data {
   String? id;
 
   Data({this.id, this.tag});
+}
+
+putPriceIndex(int priceIndex) async {
+  return await di<CacheHelper>().put('priceIndex', priceIndex);
+}
+
+putListOfPrice(List<TextEditingController> listPrice) async {
+  return await di<CacheHelper>().put('ListOfPrice', listPrice);
+}
+
+putSinglePrice(TextEditingController price) async {
+  return await di<CacheHelper>().put('singlePrice', price);
+}
+
+Future<dynamic> getSinglePrice() async {
+  return await di<CacheHelper>().get('singlePrice');
+}
+Future<dynamic> getListOfPrice() async {
+  return await di<CacheHelper>().get('ListOfPrice');
+}
+Future getPriceIndex(int priceIndex) async {
+  return await di<CacheHelper>().put('priceIndex', priceIndex);
 }

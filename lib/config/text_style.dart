@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const TextTheme textThemeData = TextTheme(
+ const TextTheme textThemeData = TextTheme(
   headline2:TextStyle(
       fontSize: 28, color:Color(0xFFFFFFFF),fontWeight: FontWeight.w900),
   headline3:TextStyle(

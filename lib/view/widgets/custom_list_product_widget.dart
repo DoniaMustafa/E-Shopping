@@ -39,11 +39,7 @@ class CustomItemProduct extends StatelessWidget {
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20.0),
                       topRight: Radius.circular(20.0)),
-                  child: FadeInImage(
-                    placeholder: AssetImage('assets/GUI/shirt/shirt1.jpg'),
-                    image: NetworkImage(prodImg),
-                    fit: BoxFit.fill,
-                  ),
+                  child: Image.network(prodImg)
                 ),
               ),
               Flexible(

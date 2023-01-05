@@ -12,6 +12,7 @@ class SignInImplement implements SignInRepository {
   Future<Response?> signIn({required String email, required String pass})async {
       return await dio.postData(url: signInEndPoint, data: {"email":email,
         "password":pass});
+
   }
 
 

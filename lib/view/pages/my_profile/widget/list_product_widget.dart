@@ -9,15 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-
-
 class MyProfListProductWidget extends StatelessWidget {
   const MyProfListProductWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MyProfileCubit, MyProfileState>(
-
       builder: (context, state) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
@@ -36,55 +33,61 @@ class MyProfListProductWidget extends StatelessWidget {
               ],
             ),
             childrenDelegate: SliverChildBuilderDelegate(
-              childCount:
-              state is LoadMyProfileState && state.userInfo == null?10:  context.read<MyProfileCubit>().userInfo!.user.products.length,
+              childCount: state is LoadMyProfileState && state.userInfo == null
+                  ? 10
+                  : context
+                      .read<MyProfileCubit>()
+                      .userInfo!
+                      .user!
+                      .products!
+                      .length,
               (context, index) {
-                if(state is SuccessMyProfileState && state.userInfo !=null){
-                return CustomItemProduct(
-
-                onTap: () {
-                  di<SingleProductCubit>().getSingleProduct(
-                      prodId: context
-                          .read<MyProfileCubit>()
-                          .userInfo!
-                          .user
-                          .products[index]
-                          .id);
-                  return Navigator.pushNamed(context, '/singleProd',
-                      arguments: Data(
-                          id: context
+                if (state is SuccessMyProfileState && state.userInfo != null) {
+                  return CustomItemProduct(
+                    onTap: () {
+                      di<SingleProductCubit>().getSingleProduct(
+                          prodId: context
                               .read<MyProfileCubit>()
                               .userInfo!
-                              .user
-                              .products[index]
-                              .id,
-                          tag: index));
-                },
-                index: index,
-                price: context
-                    .read<MyProfileCubit>()
-                    .userInfo!
-                    .user
-                    .products[index]
-                    .productVariants[0]
-                    .variantPrice
-                    .toString(),
-                prodImg: context
-                    .read<MyProfileCubit>()
-                    .userInfo!
-                    .user
-                    .products[index]
-                    .productOptions
-                    .productColors[0]
-                    .colorImages[0],
-                prodName: context
-                    .read<MyProfileCubit>()
-                    .userInfo!
-                    .user
-                    .products[index]
-                    .productName
-                    .toString(),
-              );}else if(state is LoadMyProfileState && state.userInfo == null){
+                              .user!
+                              .products![index].sId!);
+                      return Navigator.pushNamed(context, '/singleProd',
+                          arguments: Data(
+                              id: context
+                                  .read<MyProfileCubit>()
+                                  .userInfo!
+                                  .user!
+                                  .products![index]
+                                  .sId,
+                              tag: index));
+                    },
+                    index: index,
+                    price: context
+                        .read<MyProfileCubit>()
+                        .userInfo!
+                        .user!
+                        .products![index]
+                        .productVariants![0]
+                        .variantPrice
+                        .toString(),
+                    prodImg: context
+                        .read<MyProfileCubit>()
+                        .userInfo!
+                        .user!
+                        .products![index]
+                        .productOptions!
+                        .productColors![0]
+                        .colorImages![0],
+                    prodName: context
+                        .read<MyProfileCubit>()
+                        .userInfo!
+                        .user!
+                        .products![index]
+                        .productName
+                        .toString(),
+                  );
+                } else if (state is LoadMyProfileState &&
+                    state.userInfo == null) {
                   return const LoadingWidget();
                 }
               },

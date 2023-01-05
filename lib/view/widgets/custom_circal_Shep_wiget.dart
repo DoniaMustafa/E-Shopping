@@ -6,7 +6,12 @@ import 'package:flutter/material.dart';
 
 class CustomCircleShapeWidget extends StatelessWidget {
   const CustomCircleShapeWidget(
-      {Key? key, required this.txt, this.isIcon = false, this.icon, this.image})
+      {Key? key,
+      required this.txt,
+      this.isIcon = false,
+      this.icon,
+      this.image,
+      })
       : super(key: key);
   final String txt;
   final bool isIcon;
@@ -16,9 +21,7 @@ class CustomCircleShapeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-        constraints: const BoxConstraints(
-          maxHeight: 70.0,
-        ),
+        constraints: const BoxConstraints(maxHeight: 70.0,),
         decoration: BoxDecoration(
           color: gray.withOpacity(0.1),
           borderRadius: BorderRadius.circular(50.0),

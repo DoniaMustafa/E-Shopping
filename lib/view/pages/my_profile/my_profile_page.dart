@@ -20,17 +20,21 @@ class MyProfilePage extends StatelessWidget {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
-            children: const [
+            children: [
               DeepWidget(),
-              MyProfListProductWidget()
-              // context.watch<MyProfileCubit>().userInfo!.user.products.isNotEmpty
-              //     ? const ListProductWidget()
-              //     : Center(
-              //         child: CustomTextWidget(
-              //           txt: 'There is not List product',
-              //           style: textThemeData.headline6!.copyWith(color: black),
-              //         ),
-              //       ),
+              MyProfListProductWidget(),
+              // BlocBuilder<MyProfileCubit,MyProfileState>(
+              //   builder: (context,state) =>
+              //      state is SuccessMyProfileState&& di<MyProfileCubit>().userInfo!.user.products.isNotEmpty
+              //           ?
+              //           : Center(
+              //               child: CustomTextWidget(
+              //                 txt: 'There is not List product',
+              //                 style: textThemeData.headline6!
+              //                     .copyWith(color: black),
+              //               ),
+              //             ),
+              // )
             ],
           ),
         ),

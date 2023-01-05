@@ -8,13 +8,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CustomTextFormWidget extends StatelessWidget {
   const CustomTextFormWidget(
       {Key? key,
+        this.onChanged,
       required this.txtField,
       required this.controller,
       required this.val,
       this.isPass = false,
       this.isShow = false,
       this.onTap,
-      required this.icon})
+       this.icon,
+        this.line=1,
+      this.isAddProd =false})
       : super(key: key);
   final String txtField;
   final TextEditingController controller;
@@ -22,10 +25,15 @@ class CustomTextFormWidget extends StatelessWidget {
   final bool? isPass;
   final bool isShow;
   final onTap;
-  final IconData icon;
+  final  onChanged;
+  final IconData? icon;
+  final bool isAddProd;
+  final int line;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onFieldSubmitted: (String i)=>onChanged,
+      maxLines: line,
       obscureText: isShow,
       controller: controller,
       validator: (String? validate) {
@@ -34,17 +42,20 @@ class CustomTextFormWidget extends StatelessWidget {
         }
       },
       decoration: InputDecoration(
+        filled:isAddProd?true:false ,
+          focusedBorder:OutlineInputBorder(
+              borderSide: BorderSide(color: isAddProd? white:deepBlue), borderRadius: BorderRadius.circular(10.0),) ,
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: white),
               borderRadius: BorderRadius.circular(10.0),
               gapPadding: 10.0),
-          border: OutlineInputBorder(
+          border: OutlineInputBorder(borderSide:BorderSide(color:white),
               borderRadius: BorderRadius.circular(10.0), gapPadding: 10.0),
           label: CustomTextWidget(
             txt: txtField,
             style: textThemeData.bodyText1!,
           ),
-          prefixIcon: Icon(
+          prefixIcon:isAddProd?null: Icon(
             icon,
             size: 25,
           ),

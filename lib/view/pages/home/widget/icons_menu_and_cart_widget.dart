@@ -37,7 +37,7 @@ class IconsMenuAndCartWidget extends StatelessWidget {
   builder: (context, state) {
     return GestureDetector(
       onTap: ()=>context.read<HomeCubit>().getAllProduct(),
-      child: const CustomCircleShapeWidget(txt: 'Menu',isIcon:true ,icon: Icons.menu,));
+      child:  CustomCircleShapeWidget(txt: 'Menu',isIcon:true ,icon: Icons.menu,));
   },
 );
 

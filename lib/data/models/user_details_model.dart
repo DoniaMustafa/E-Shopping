@@ -1,174 +1,188 @@
-// To parse this JSON data, do
-//
-//     final userDetailsModel = userDetailsModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
-UserDetailsModel userDetailsModelFromJson(String str) =>
-    UserDetailsModel.fromJson(json.decode(str));
+UserDetailsModel userDetailsModelFromMap(String str) => UserDetailsModel.fromJson(json.decode(str));
 
-String userDetailsModelToJson(UserDetailsModel data) =>
-    json.encode(data.toJson());
+String userDetailsModelToMap(UserDetailsModel data) => json.encode(data.toJson());
 
 class UserDetailsModel {
-  UserDetailsModel({
-    required this.user,
-    required this.message,
-    required this.status,
-  });
+  User? user;
+  String? message;
+  int? status;
 
-  final User user;
-  final String message;
-  final int status;
+  UserDetailsModel({this.user, this.message, this.status});
 
-  factory UserDetailsModel.fromJson(Map<String, dynamic> json) =>
-      UserDetailsModel(
-        user: User.fromJson(json["user"]),
-        message: json["message"],
-        status: json["status"],
-      );
+  UserDetailsModel.fromJson(Map<String, dynamic> json) {
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    message = json['message'];
+    status = json['status'];
+  }
 
-  Map<String, dynamic> toJson() => {
-        "user": user.toJson(),
-        "message": message,
-        "status": status,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.user != null) {
+      data['user'] = this.user!.toJson();
+    }
+    data['message'] = this.message;
+    data['status'] = this.status;
+    return data;
+  }
 }
 
 class User {
-  User({
-    required this.id,
-    required this.fullName,
-    required this.email,
-    required this.password,
-    required this.products,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
-  });
+  String? sId;
+  String? fullName;
+  String? email;
+  String? password;
+  List<Products>? products;
+  String? createdAt;
+  String? updatedAt;
+  int? iV;
 
-  final String id;
-  final String fullName;
-  final String email;
-  final String password;
-  final List<Product> products;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final int v;
+  User(
+      {this.sId,
+        this.fullName,
+        this.email,
+        this.password,
+        this.products,
+        this.createdAt,
+        this.updatedAt,
+        this.iV});
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["_id"],
-        fullName: json["fullName"],
-        email: json["email"],
-        password: json["password"],
-        products: List<Product>.from(
-            json["products"].map((x) => Product.fromJson(x))),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
-      );
+  User.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    fullName = json['fullName'];
+    email = json['email'];
+    password = json['password'];
+    if (json['products'] != null) {
+      products = <Products>[];
+      json['products'].forEach((v) {
+        products!.add(new Products.fromJson(v));
+      });
+    }
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+    iV = json['__v'];
+  }
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "fullName": fullName,
-        "email": email,
-        "password": password,
-        "products": List<dynamic>.from(products.map((x) => x.toJson())),
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "__v": v,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['fullName'] = this.fullName;
+    data['email'] = this.email;
+    data['password'] = this.password;
+    if (this.products != null) {
+      data['products'] = this.products!.map((v) => v.toJson()).toList();
+    }
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
+    data['__v'] = this.iV;
+    return data;
+  }
 }
 
-class Product {
-  Product({
-    required this.productOptions,
-    required this.id,
-    required this.productName,
-    required this.productVariants,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.v,
-  });
+class Products {
+  ProductOptions? productOptions;
+  String? sId;
+  String? productName;
+  List<ProductVariants>? productVariants;
+  String? createdAt;
+  String? updatedAt;
+  int? iV;
 
-  final ProductOptions productOptions;
-  final String id;
-  final String productName;
-  final List<ProductVariants> productVariants;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final int v;
+  Products(
+      {this.productOptions,
+        this.sId,
+        this.productName,
+        this.productVariants,
+        this.createdAt,
+        this.updatedAt,
+        this.iV});
 
-  factory Product.fromJson(Map<String, dynamic> json) => Product(
-        productOptions: ProductOptions.fromJson(json["productOptions"]),
-        id: json["_id"],
-        productName: json["productName"],
-        productVariants: List<ProductVariants>.from(
-            json["productVariants"].map((x) => ProductVariants.fromJson(x))),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        v: json["__v"],
-      );
+  Products.fromJson(Map<String, dynamic> json) {
+    productOptions = json['productOptions'] != null
+        ? new ProductOptions.fromJson(json['productOptions'])
+        : null;
+    sId = json['_id'];
+    productName = json['productName'];
+    if (json['productVariants'] != null) {
+      productVariants = <ProductVariants>[];
+      json['productVariants'].forEach((v) {
+        productVariants!.add(new ProductVariants.fromJson(v));
+      });
+    }
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+    iV = json['__v'];
+  }
 
-  Map<String, dynamic> toJson() => {
-        "productOptions": productOptions.toJson(),
-        "_id": id,
-        "productName": productName,
-        "productVariants":
-            List<dynamic>.from(productVariants.map((x) => x.toJson())),
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "__v": v,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.productOptions != null) {
+      data['productOptions'] = this.productOptions!.toJson();
+    }
+    data['_id'] = this.sId;
+    data['productName'] = this.productName;
+    if (this.productVariants != null) {
+      data['productVariants'] =
+          this.productVariants!.map((v) => v.toJson()).toList();
+    }
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
+    data['__v'] = this.iV;
+    return data;
+  }
 }
 
 class ProductOptions {
-  ProductOptions({
-    required this.productSizes,
-    required this.productColors,
-  });
+  List<String>? productSizes;
+  List<ProductColors>? productColors;
 
-  final List<String> productSizes;
-  final List<ProductColor> productColors;
+  ProductOptions({this.productSizes, this.productColors});
 
-  factory ProductOptions.fromJson(Map<String, dynamic> json) => ProductOptions(
-        productSizes: List<String>.from(json["productSizes"].map((x) => x)),
-        productColors: List<ProductColor>.from(
-            json["productColors"].map((x) => ProductColor.fromJson(x))),
-      );
+  ProductOptions.fromJson(Map<String, dynamic> json) {
+    productSizes = json['productSizes'].cast<String>();
+    if (json['productColors'] != null) {
+      productColors = <ProductColors>[];
+      json['productColors'].forEach((v) {
+        productColors!.add(new ProductColors.fromJson(v));
+      });
+    }
+  }
 
-  Map<String, dynamic> toJson() => {
-        "productSizes": List<dynamic>.from(productSizes.map((x) => x)),
-        "productColors":
-            List<dynamic>.from(productColors.map((x) => x.toJson())),
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['productSizes'] = this.productSizes;
+    if (this.productColors != null) {
+      data['productColors'] =
+          this.productColors!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
-//
-class ProductColor {
-  ProductColor({
-    required this.colorImages,
-    required this.colorName,
-    required this.id,
-  });
 
-  final List<String> colorImages;
-  final String colorName;
-  final String id;
+class ProductColors {
+  List<String>? colorImages;
+  String? colorName;
+  String? sId;
 
-  factory ProductColor.fromJson(Map<String, dynamic> json) => ProductColor(
-        colorImages: List<String>.from(json["colorImages"].map((x) => x)),
-        colorName: json["colorName"],
-        id: json["_id"],
-      );
+  ProductColors({this.colorImages, this.colorName, this.sId});
 
-  Map<String, dynamic> toJson() => {
-        "colorImages": List<dynamic>.from(colorImages.map((x) => x)),
-        "colorName": colorName,
-        "_id": id,
-      };
+  ProductColors.fromJson(Map<String, dynamic> json) {
+    colorImages = json['colorImages'].cast<String>();
+    colorName = json['colorName'];
+    sId = json['_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['colorImages'] = this.colorImages;
+    data['colorName'] = this.colorName;
+    data['_id'] = this.sId;
+    return data;
+  }
 }
-//
+
 class ProductVariants {
   VariantAttributes? variantAttributes;
   String? sId;
@@ -214,43 +228,41 @@ class ProductVariants {
   }
 }
 
-//
 class VariantAttributes {
-  VariantAttributes({
-    required this.variantColor,
-    required this.variantSize,
-  });
+  VariantColor? variantColor;
+  String? variantSize;
 
-  final VariantColor? variantColor;
-  final String variantSize;
+  VariantAttributes({this.variantColor, this.variantSize});
 
-  factory VariantAttributes.fromJson(Map<String, dynamic> json) =>
-      VariantAttributes(
-        variantColor: json["variantColor"] == null
-            ? null
-            : VariantColor.fromJson(json["variantColor"]),
-        variantSize: json["variantSize"],
-      );
+  VariantAttributes.fromJson(Map<String, dynamic> json) {
+    variantColor = json['variantColor'] != null
+        ? new VariantColor.fromJson(json['variantColor'])
+        : null;
+    variantSize = json['variantSize'];
+  }
 
-  Map<String, dynamic> toJson() => {
-        "variantColor": variantColor == null ? null : variantColor!.toJson(),
-        "variantSize": variantSize,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.variantColor != null) {
+      data['variantColor'] = this.variantColor!.toJson();
+    }
+    data['variantSize'] = this.variantSize;
+    return data;
+  }
 }
-//
+
 class VariantColor {
-  VariantColor({
-    required this.colorName,
-  });
+  String? colorName;
 
-  final String colorName;
+  VariantColor({this.colorName});
 
-  factory VariantColor.fromJson(Map<String, dynamic> json) => VariantColor(
-        colorName: json["colorName"],
-      );
+  VariantColor.fromJson(Map<String, dynamic> json) {
+    colorName = json['colorName'];
+  }
 
-  Map<String, dynamic> toJson() => {
-        "colorName": colorName,
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['colorName'] = this.colorName;
+    return data;
+  }
 }
-//

@@ -13,6 +13,7 @@ class MyProfileCubit extends Cubit<MyProfileState> {
   MyProfileCubit(this.repository) : super(MyProfileInitial());
   MyProfileRepository repository;
   UserDetailsModel? userInfo;
+
   getMyInfo() async {
     emit(LoadMyProfileState());
     return await repository.getMyInfo(token: myToken!).then((value) {
@@ -20,7 +21,7 @@ class MyProfileCubit extends Cubit<MyProfileState> {
       print(userInfo);
       emit(SuccessMyProfileState(userInfo));
     }).catchError((error) {
-      print(error.toString());
+      print('error : ${error.toString()}');
       emit(ErrorState(error.toString()));
     });
   }

@@ -45,16 +45,16 @@ class FrontWidgetSignup extends StatelessWidget {
                           .formKey2
                           .currentState!
                           .validate()) {
-                        print('ff');
-                        print(context.read<SignUpCubit>().userController.text);
-                        print(context
-                            .read<SignUpCubit>()
-                            .emailController
-                            .text);
-                        print(context
-                            .read<SignUpCubit>()
-                            .passController
-                            .text);
+                        // print('ff');
+                        // print(context.read<SignUpCubit>().userController.text);
+                        // print(context
+                        //     .read<SignUpCubit>()
+                        //     .emailController
+                        //     .text);
+                        // print(context
+                        //     .read<SignUpCubit>()
+                        //     .passController
+                        //     .text);
 
                         return context.read<SignUpCubit>().signUp(
                             userName:

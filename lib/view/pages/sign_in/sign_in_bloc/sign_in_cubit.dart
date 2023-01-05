@@ -36,6 +36,7 @@ class SignInCubit extends Cubit<SignInState> {
       print(value!.data);
       emit(SuccessState(userData));
     }).catchError((error) {
+      print(error.toString());
       emit(ErrorState(error.toString()));
     });
   }
